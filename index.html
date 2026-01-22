@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDAS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MIDAS</h1>
+            <p class="subtitle">$1K → $25K in 60 days. Then we scale. Powered by Claude.</p>
+            <p class="tagline">Proving AI can make you financially free.</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-value"><span id="day">1</span>/60</span>
+                <span class="stat-label">Day</span>
+            </div>
+            <div class="stat primary">
+                <span class="stat-value" id="treasury">$1,000</span>
+                <span class="stat-label">Treasury</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">$25,000</span>
+                <span class="stat-label">Goal</span>
+            </div>
+        </div>
+
+        <div class="ledger-bar">
+            <div class="ledger-item spent">
+                <span class="ledger-label">Spent</span>
+                <span class="ledger-value" id="spent">$0</span>
+            </div>
+            <div class="ledger-item revenue">
+                <span class="ledger-label">Revenue</span>
+                <span class="ledger-value" id="revenue">$0</span>
+            </div>
+            <div class="ledger-item net">
+                <span class="ledger-label">Net</span>
+                <span class="ledger-value" id="net">$0</span>
+            </div>
+        </div>
+
+        <main id="conversations">
+            <p class="empty">Loading...</p>
+        </main>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 id="modal-title"></h2>
+            <p class="modal-meta" id="modal-meta"></p>
+            <div class="messages" id="modal-messages"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
