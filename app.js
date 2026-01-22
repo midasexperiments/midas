@@ -3,16 +3,34 @@
 let conversations = [];
 let treasury = null;
 
-// Fetch conversations
+// Fetch conversations (try API first, fallback to static file for Vercel)
 async function loadConversations() {
     try {
+        // Try API first (local dev with Python server)
         const response = await fetch('/api/conversations');
-        conversations = await response.json();
-        render();
+        if (response.ok) {
+            conversations = await response.json();
+            render();
+            return;
+        }
     } catch (err) {
-        document.getElementById('conversations').innerHTML =
-            '<p class="empty">No conversations yet.<br>Run: python orchestrator.py</p>';
+        // API not available, try static file (Vercel)
     }
+
+    try {
+        const response = await fetch('/data.json');
+        if (response.ok) {
+            const data = await response.json();
+            conversations = data.conversations || [];
+            render();
+            return;
+        }
+    } catch (err) {
+        // Static file also failed
+    }
+
+    document.getElementById('conversations').innerHTML =
+        '<p class="empty">No conversations yet.<br>Run: python orchestrator.py</p>';
 }
 
 // Fetch treasury balance (live from Solana wallet)
